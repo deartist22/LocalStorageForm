@@ -1,12 +1,14 @@
 // Variables
 const tweetList = document.getElementById("tweet-list");
-
+const textarea = document.querySelector("textarea");
 
 eventListeners();
 //Event Listeners
 function eventListeners() {
     //Form submission
-    document.querySelector("#form").addEventListener("submit", newTweet)
+    document.querySelector("#form").addEventListener("submit", newTweet);
+    //Remove tweet from the list
+    tweetList.addEventListener("click", removeTweet);
 }
 
 
@@ -27,4 +29,12 @@ function newTweet(e){
     li.appendChild(removeBtn);
     //Add to list
     tweetList.appendChild(li);
+    textarea.value = "";
+}
+
+//
+function removeTweet(e) {
+    if(e.target.classList.contains("remove-tweet")) {
+        e.target.parentElement.remove();
+    } 
 }
