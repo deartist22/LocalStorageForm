@@ -30,6 +30,8 @@ function newTweet(e){
     //Add to list
     tweetList.appendChild(li);
     textarea.value = "";
+    //Add to local storage
+    addTweetLocalStorage(tweet);
 }
 
 //
@@ -37,4 +39,24 @@ function removeTweet(e) {
     if(e.target.classList.contains("remove-tweet")) {
         e.target.parentElement.remove();
     } 
+}
+
+//Add the tweets into the local storage
+function addTweetLocalStorage(tweet) {
+    let tweets = getTweetsFromStorage();
+    //Add tweet into array
+    tweets.push(tweet);
+    localStorage.setItem("tweets", JSON.stringify(tweets));
+}
+
+function getTweetsFromStorage() {
+    let tweets;
+    const tweetsLS = localStorage.getItem("tweets")
+    //Get the values, if null is returned then we create an empty array
+    if(tweetsLS === null) {
+        tweets = [];
+    } else {
+        tweets = JSON.parse(tweetsLS);
+    }
+    return tweets;
 }
