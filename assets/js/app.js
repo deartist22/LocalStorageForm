@@ -34,6 +34,8 @@ function newTweet(e){
     textarea.value = "";
     //Add to local storage
     addTweetLocalStorage(tweet);
+    //Alert message
+    alert("Tweet Added");
 }
 
 //
@@ -92,9 +94,10 @@ function removeTweetLocalStorage(tweet) {
     //Remove the X from the tweet
     const tweetDelete = tweet.substring(0, tweet.length -1);
     //Loop through the tweets and remove the tweet that's equal
-    tweets.forEach(function(tweetLS) {
+    tweets.forEach(function(tweetLS, index) {
         if(tweetDelete === tweetLS) {
-            console.log("yes");
+            tweets.splice(index, 1)
         }
-    })
+    });
+    localStorage.setItem("tweets", JSON.stringify(tweets));
 }
